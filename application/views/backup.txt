@@ -1,0 +1,67 @@
+<?php $no = 0;
+        foreach ($user as $us) {
+            $no++; ?>
+            <div class="modal fade bd-example-modal-lg" id="formEditUser<?= $us['id_user']; ?>" tabindex="-1" aria-labelledby="judulUser" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="judulUser">Edit Data User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="<?= base_url(); ?>Registrasi/edit_user" method="post">
+                                <input type="hidden" name="id_user" value="<?= $us['id_user']; ?>" id="id_user">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" name="username" id="username" value="<?= $us['username']; ?>" placeholder="Username Pengguna">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email" value="<?= $us['email']; ?>" placeholder="example@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" name="password" id="password" value="<?= $us['password']; ?>" placeholder="Password">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="password">Konfirmasi Password</label>
+                                        <input type="password" class="form-control" name="password2" id="password2" value="<?= $us['password']; ?>" placeholder="Konfirmasi Password">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Show Password
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="nama">Nama User</label>
+                                        <input type="text" class="form-control" name="nama" id="nama" value="<?= $us['nama']; ?>" placeholder="Nama Pengguna">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="akses">Hak Akses</label>
+                                        <select id="akses" name="akses" class="form-control">
+                                            <option selected value="<?= $us['akses']; ?>"><?= $us['username']; ?></option>
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" name="submit" class="btn btn-primary btn-sm">Edit</button>
+                                    <button type="reset" name="kembali" class="btn btn-secondary btn-sm" data-dismiss="modal">Kembali</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
