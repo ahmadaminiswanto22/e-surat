@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Apr 2021 pada 03.42
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.7
+-- Generation Time: Aug 08, 2023 at 07:13 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kelas`
+-- Table structure for table `tbl_kelas`
 --
 
 CREATE TABLE `tbl_kelas` (
@@ -35,7 +35,7 @@ CREATE TABLE `tbl_kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_kelas`
+-- Dumping data for table `tbl_kelas`
 --
 
 INSERT INTO `tbl_kelas` (`id_kelas`, `jenjang`, `jurusan`, `jmlh`) VALUES
@@ -57,7 +57,7 @@ INSERT INTO `tbl_kelas` (`id_kelas`, `jenjang`, `jurusan`, `jmlh`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_siswa`
+-- Table structure for table `tbl_siswa`
 --
 
 CREATE TABLE `tbl_siswa` (
@@ -72,7 +72,7 @@ CREATE TABLE `tbl_siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_siswa`
+-- Dumping data for table `tbl_siswa`
 --
 
 INSERT INTO `tbl_siswa` (`id_siswa`, `nis`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tgl_lahir`, `alamt`, `id_kelas`) VALUES
@@ -87,7 +87,7 @@ INSERT INTO `tbl_siswa` (`id_siswa`, `nis`, `nama`, `jenis_kelamin`, `tempat_lah
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_suratmasuk`
+-- Table structure for table `tbl_suratmasuk`
 --
 
 CREATE TABLE `tbl_suratmasuk` (
@@ -104,7 +104,7 @@ CREATE TABLE `tbl_suratmasuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_suratmasuk`
+-- Dumping data for table `tbl_suratmasuk`
 --
 
 INSERT INTO `tbl_suratmasuk` (`id_suratMasuk`, `nomor`, `lampiran`, `perihal`, `asal_surat`, `id_siswa`, `id_kelas`, `gambar`, `petugas`, `tgl_srtMasuk`) VALUES
@@ -116,7 +116,7 @@ INSERT INTO `tbl_suratmasuk` (`id_suratMasuk`, `nomor`, `lampiran`, `perihal`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_surat_cetak`
+-- Table structure for table `tbl_surat_cetak`
 --
 
 CREATE TABLE `tbl_surat_cetak` (
@@ -131,16 +131,17 @@ CREATE TABLE `tbl_surat_cetak` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_surat_cetak`
+-- Dumping data for table `tbl_surat_cetak`
 --
 
 INSERT INTO `tbl_surat_cetak` (`idCetak`, `nomor`, `lampiran`, `perihal`, `tgl_surat`, `perusahaan`, `almt_perusahaan`, `id_user`) VALUES
-(12, 'SM-I-20', '-', 'Surat Pengajuan', 'Bekasi, 22 Mei 2020', 'PT Karya Guna', 'jln. Surya', 5);
+(12, 'SM-I-20', '-', 'Surat Pengajuan', 'Bekasi, 22 Mei 2020', 'PT Karya Guna', 'jln. Surya', 5),
+(13, '4747', '-', 'Surat PKL', '7 November', 'PT. Terus Mundur', 'jln. Bingung', 10);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_surat_cetakdetail`
+-- Table structure for table `tbl_surat_cetakdetail`
 --
 
 CREATE TABLE `tbl_surat_cetakdetail` (
@@ -150,16 +151,19 @@ CREATE TABLE `tbl_surat_cetakdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_surat_cetakdetail`
+-- Dumping data for table `tbl_surat_cetakdetail`
 --
 
 INSERT INTO `tbl_surat_cetakdetail` (`id`, `idCetak`, `id_siswa`) VALUES
-(13, 12, 5);
+(13, 12, 5),
+(14, 13, 4),
+(15, 13, 6),
+(16, 13, 9);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -172,7 +176,7 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama`, `akses`, `email`) VALUES
@@ -184,20 +188,20 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama`, `akses`, `ema
 --
 
 --
--- Indeks untuk tabel `tbl_kelas`
+-- Indexes for table `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
--- Indeks untuk tabel `tbl_siswa`
+-- Indexes for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   ADD PRIMARY KEY (`id_siswa`) USING BTREE,
   ADD KEY `id_kelas` (`id_kelas`);
 
 --
--- Indeks untuk tabel `tbl_suratmasuk`
+-- Indexes for table `tbl_suratmasuk`
 --
 ALTER TABLE `tbl_suratmasuk`
   ADD PRIMARY KEY (`id_suratMasuk`),
@@ -205,14 +209,14 @@ ALTER TABLE `tbl_suratmasuk`
   ADD KEY `id_kelas` (`id_kelas`);
 
 --
--- Indeks untuk tabel `tbl_surat_cetak`
+-- Indexes for table `tbl_surat_cetak`
 --
 ALTER TABLE `tbl_surat_cetak`
   ADD PRIMARY KEY (`idCetak`) USING BTREE,
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `tbl_surat_cetakdetail`
+-- Indexes for table `tbl_surat_cetakdetail`
 --
 ALTER TABLE `tbl_surat_cetakdetail`
   ADD PRIMARY KEY (`id`),
@@ -220,76 +224,76 @@ ALTER TABLE `tbl_surat_cetakdetail`
   ADD KEY `id_siswa` (`id_siswa`);
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kelas`
+-- AUTO_INCREMENT for table `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
   MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_siswa`
+-- AUTO_INCREMENT for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_suratmasuk`
+-- AUTO_INCREMENT for table `tbl_suratmasuk`
 --
 ALTER TABLE `tbl_suratmasuk`
   MODIFY `id_suratMasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_surat_cetak`
+-- AUTO_INCREMENT for table `tbl_surat_cetak`
 --
 ALTER TABLE `tbl_surat_cetak`
-  MODIFY `idCetak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCetak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_surat_cetakdetail`
+-- AUTO_INCREMENT for table `tbl_surat_cetakdetail`
 --
 ALTER TABLE `tbl_surat_cetakdetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_user`
+-- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tbl_siswa`
+-- Constraints for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   ADD CONSTRAINT `tbl_siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `tbl_kelas` (`id_kelas`);
 
 --
--- Ketidakleluasaan untuk tabel `tbl_suratmasuk`
+-- Constraints for table `tbl_suratmasuk`
 --
 ALTER TABLE `tbl_suratmasuk`
   ADD CONSTRAINT `tbl_suratmasuk_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `tbl_siswa` (`id_siswa`),
   ADD CONSTRAINT `tbl_suratmasuk_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `tbl_kelas` (`id_kelas`);
 
 --
--- Ketidakleluasaan untuk tabel `tbl_surat_cetak`
+-- Constraints for table `tbl_surat_cetak`
 --
 ALTER TABLE `tbl_surat_cetak`
   ADD CONSTRAINT `tbl_surat_cetak_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `tbl_surat_cetakdetail`
+-- Constraints for table `tbl_surat_cetakdetail`
 --
 ALTER TABLE `tbl_surat_cetakdetail`
   ADD CONSTRAINT `tbl_surat_cetakdetail_ibfk_1` FOREIGN KEY (`idCetak`) REFERENCES `tbl_surat_cetak` (`idCetak`),
